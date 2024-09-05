@@ -1,50 +1,102 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { TextField, Button, Snackbar, Alert, Box, Container, Typography } from '@mui/material';
 
-const CreatePostForm = () => {
+const CreatePostForm = ({ onClose }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [message, setMessage] = useState('');
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarType, setSnackbarType] = useState('success'); // 'success' or 'error'
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/posts', {
+      await axios.post('http://localhost:3000/posts', {
         post: { title, content },
       });
       setMessage('Post created successfully!');
+      setSnackbarType('success');
+      setOpenSnackbar(true);
       setTitle('');
       setContent('');
+      onClose(); // Close form after successful post
     } catch (error) {
       setMessage('Error creating post');
+      setSnackbarType('error');
+      setOpenSnackbar(true);
     }
   };
 
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
   return (
-    <div>
-      <h2>Create a New Post</h2>
-      {message && <p>{message}</p>}
+    <Container
+    sx={{
+      backgroundColor: '#E2BBE9',
+      padding: '16px',
+      borderRadius: '8px',
+      marginTop: '20px',
+      marginBottom: '16px',
+    }}
+    >
+      <Typography variant="h4" component="h2" gutterBottom>
+        Create a New Post
+      </Typography>
+      {message && (
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+        >
+          <Alert onClose={handleCloseSnackbar} severity={snackbarType}>
+            {message}
+          </Alert>
+        </Snackbar>
+      )}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Content:</label>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          ></textarea>
-        </div>
-        <button type="submit">Create Post</button>
+        <TextField
+          label="Title"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <TextField
+          label="Content"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          multiline
+          rows={4}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+        />
+        <Box sx={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="small"
+          >
+            Create Post
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="small"
+            onClick={onClose}
+          >
+            Cancel
+          </Button>
+        </Box>
       </form>
-    </div>
+    </Container>
   );
 };
 

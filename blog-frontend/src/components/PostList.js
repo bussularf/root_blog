@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { List, ListItem, ListItemText, Typography, Container } from '@mui/material';
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -11,17 +12,29 @@ export const PostList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Blog Posts</h1>
-      <ul>
+    <Container
+    sx={{
+      backgroundColor: '#E2BBE9',
+      padding: '16px',
+      borderRadius: '8px',
+      marginTop: '20px',
+      marginBottom: '40px',
+    }}
+    >
+        <Typography variant="h4" component="h1" gutterBottom>
+          Blog Posts
+        </Typography>
+      <List>
         {posts.map(post => (
-          <li key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-          </li>
+          <ListItem key={post.id}>
+            <ListItemText 
+              primary={<Typography variant="h6">{post.title}</Typography>}
+              secondary={<Typography variant="body1">{post.content}</Typography>}
+            />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 };
 
