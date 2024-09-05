@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { TextField, Button, Snackbar, Alert, Box, Container, Typography } from '@mui/material';
+import { TextField, Button, Snackbar, Alert, Box, Container, Typography, Card} from '@mui/material';
 
 const CreatePostForm = ({ onClose }) => {
   const [title, setTitle] = useState('');
@@ -39,63 +39,72 @@ const CreatePostForm = ({ onClose }) => {
       padding: '16px',
       borderRadius: '8px',
       marginTop: '20px',
-      marginBottom: '16px',
+      marginBottom: '20px',
     }}
     >
       <Typography variant="h4" component="h2" gutterBottom>
         Create a New Post
       </Typography>
-      {message && (
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-        >
-          <Alert onClose={handleCloseSnackbar} severity={snackbarType}>
-            {message}
-          </Alert>
-        </Snackbar>
-      )}
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="Title"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <TextField
-          label="Content"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          multiline
-          rows={4}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-        <Box sx={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="small"
+      <Card
+      sx={{
+        backgroundColor: '#D7C3F1',
+        padding: '20px'
+      }}
+      >
+        {message && (
+          <Snackbar
+            open={openSnackbar}
+            autoHideDuration={6000}
+            onClose={handleCloseSnackbar}
           >
-            Create Post
-          </Button>
-          <Button
+            <Alert onClose={handleCloseSnackbar} severity={snackbarType}>
+              {message}
+            </Alert>
+          </Snackbar>
+        )}
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Title"
             variant="outlined"
-            color="secondary"
-            size="small"
-            onClick={onClose}
-          >
-            Cancel
-          </Button>
-        </Box>
-      </form>
+            fullWidth
+            margin="normal"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <TextField
+            label="Content"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            multiline
+            rows={4}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          />
+          <Box sx={{ display: 'flex', gap: '8px', marginTop: '16px',
+            justifyContent: 'flex-end',
+          }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="small"
+            >
+              Create Post
+            </Button>
+            <Button
+              variant="outlined"
+              color="purple"
+              size="small"
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+          </Box>
+        </form>
+      </Card>
     </Container>
   );
 };

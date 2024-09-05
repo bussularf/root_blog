@@ -18,7 +18,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Playfair Display", serif', // Define a fonte Playfair Display
+    fontFamily: '"Playfair Display", serif',
   },
 });
 
@@ -46,28 +46,29 @@ function App() {
       <AppBar position="static"
         sx={{
           backgroundColor: '#E2BBE9',
-          marginBottom: '40px',
           borderRadius: '0 0 8px 8px',
           padding: '16px',
+          textShadow: '2px 2px 4px #000002;'
+
         }}
       >
         <Toolbar>
-          <Container>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }}>
+          <Container
+          sx={{
+            display: 'flex',
+          }}
+          >
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1, color: 'white' }}>
               My Blog
             </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-              }}
-            >
+            <Box>
               <Button
                 variant="contained"
                 color="primary"
                 size="small"
                 onClick={handleOpenForm}
                 ref={buttonRef}
+                sx={{ boxShadow: '2px 2px 4px 1px #000002;'}}
               >
                 Create New Post
               </Button>
