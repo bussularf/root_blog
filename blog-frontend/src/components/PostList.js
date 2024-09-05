@@ -26,7 +26,7 @@ export const PostList = () => {
         </Typography>
       <List>
         {posts.map(post => (
-          <ListItem key={post.id}>
+          <ListItem key={post.id}          >
             <ListItemText 
               primary={<Typography variant="h6">{post.title}</Typography>}
               secondary={<Typography variant="body1">{post.content}</Typography>}

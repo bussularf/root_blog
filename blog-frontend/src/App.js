@@ -17,13 +17,15 @@ const theme = createTheme({
       default: '#9B86BD',
     },
   },
+  typography: {
+    fontFamily: '"Playfair Display", serif', // Define a fonte Playfair Display
+  },
 });
 
 function App() {
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
-  const formRef = useRef(null); // Ref for the form container
-  const buttonRef = useRef(null); // Ref for the button
-
+  const formRef = useRef(null);
+  const buttonRef = useRef(null);
   const handleOpenForm = () => {
     setShowCreatePostForm(true);
   };
@@ -51,7 +53,7 @@ function App() {
       >
         <Toolbar>
           <Container>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }}>
               My Blog
             </Typography>
             <Box

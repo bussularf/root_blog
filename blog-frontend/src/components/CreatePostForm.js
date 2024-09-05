@@ -7,7 +7,7 @@ const CreatePostForm = ({ onClose }) => {
   const [content, setContent] = useState('');
   const [message, setMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarType, setSnackbarType] = useState('success'); // 'success' or 'error'
+  const [snackbarType, setSnackbarType] = useState('success');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,7 +20,7 @@ const CreatePostForm = ({ onClose }) => {
       setOpenSnackbar(true);
       setTitle('');
       setContent('');
-      onClose(); // Close form after successful post
+      onClose();
     } catch (error) {
       setMessage('Error creating post');
       setSnackbarType('error');
