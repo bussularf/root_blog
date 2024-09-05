@@ -42,7 +42,8 @@ const CreatePostForm = ({ onClose }) => {
       marginBottom: '20px',
     }}
     >
-      <Typography variant="h4" component="h2" gutterBottom>
+      <Typography variant="h4" component="h2" gutterBottom color='white'
+      sx={{ textShadow: '2px 2px 4px #000002;' }}>
         Create a New Post
       </Typography>
       <Card
